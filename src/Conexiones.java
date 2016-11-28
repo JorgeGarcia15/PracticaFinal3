@@ -86,19 +86,11 @@ public class Conexiones {
             ex.printStackTrace();
         }
     }
-    
-     public void removeSelectedRows(JTable table){
-   DefaultTableModel model = (DefaultTableModel) table.getModel();
-   int[] rows = table.getSelectedRows();
-   for(int i=0;i<rows.length;i++){
-     model.removeRow(rows[i]-i);
-   }
-     }
-    
+   
     public String borrarUnaFila(JTable tabla, String tablaelegida, int b) throws SQLException {
 
         String salida = "";
-        System.out.println(tabla.getModel().getValueAt(b, 0));
+        System.out.println(tabla.getModel().getValueAt(1, 0));
 
         try {
             Statement sta = conn1.createStatement();

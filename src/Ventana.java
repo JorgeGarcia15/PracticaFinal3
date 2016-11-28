@@ -3,6 +3,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -22,6 +23,7 @@ public class Ventana extends javax.swing.JFrame {
         initComponents();
         gesCon.AbrirConexion();
         gesCon.cargarTabla(jTable1, "SELECT * FROM empresa");
+        this.setLocationRelativeTo(null);
         
     }
 
@@ -34,7 +36,6 @@ public class Ventana extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -42,6 +43,7 @@ public class Ventana extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox();
         jButton1 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -74,11 +76,18 @@ public class Ventana extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTable2MousePressed(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable2);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Tabla:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Empresa", "Tienda", "Videojuego", " " }));
+        jComboBox1.setMaximumRowCount(3);
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Empresa", "Tienda", "Videojuego" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -93,6 +102,8 @@ public class Ventana extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setText("jLabel2");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -104,30 +115,30 @@ public class Ventana extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(183, 183, 183)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel2))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(52, 52, 52)
+                .addGap(20, 20, 20)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(39, 39, 39)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(120, Short.MAX_VALUE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
         );
 
         pack();
@@ -155,24 +166,88 @@ public class Ventana extends javax.swing.JFrame {
 
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       if(jTable1.getSelectedRowCount() == 1){
         int b = jTable1.getSelectedRow();
-                   
-            try {
+        int a = jTable2.getSelectedRow();   
+        
+        if(jTable1.getSelectedRowCount() == 1){
+        
+             try {
                 gesCon.borrarUnaFila(jTable1, jComboBox1.getSelectedItem().toString(), b);
+                          
             } catch (SQLException ex) {
                 Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+                jLabel2.setText("Error");
             }
-       } else if(jTable1.getSelectedRowCount() > 1){
+        
+        
+        } 
+        if(jTable2.getSelectedRowCount() == 1){
+               try {
+               
+            if(jComboBox1.getSelectedItem().toString().equals("Empresa")){
+            gesCon.borrarUnaFila(jTable2, "videojuego", a);
+            } else if(jComboBox1.getSelectedItem().toString().equals("Videojuego") || jComboBox1.getSelectedItem().toString().equals("Tienda")){
+            gesCon.borrarUnaFila(jTable2, "videojuego_tienda",a);           
+            }
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+                jLabel2.setText("Error");
+            }
+           
+       } 
+        if(jTable1.getSelectedRowCount() > 1){
+            
             gesCon.borrarFilas(jTable1, jComboBox1.getSelectedItem().toString());
+                       
+        } if(jTable2.getSelectedRowCount() > 1){
+          
+           
+            if(jComboBox1.getSelectedItem().toString().equals("Empresa")){
+            gesCon.borrarFilas(jTable2, "videojuego");
+            } 
+            if(jComboBox1.getSelectedItem().toString().equals("Videojuego") || jComboBox1.getSelectedItem().toString().equals("Tienda")){
+            gesCon.borrarFilas(jTable2, "videojuego_tienda");           
+            }
        }
 
-       gesCon.cargarTabla(jTable1, jComboBox1.getSelectedItem().toString());
+        gesCon.cargarTabla(jTable1, "SELECT * FROM "+ jComboBox1.getSelectedItem().toString() +";");
+       jButton1.setEnabled(false);
+ 
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    
     private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
         jButton1.setEnabled(true);
+        int b = jTable1.getSelectedRow();
+        
+        
+         if(jComboBox1.getSelectedItem().toString().equals("Empresa")){
+            
+            gesCon.cargarTabla(jTable2, "SELECT * FROM videojuego where Empresa = "+jTable1.getModel().getValueAt(b, 0) +";");
+        
+        }
+        
+         if(jComboBox1.getSelectedItem().toString().equals("Videojuego")){
+        
+           gesCon.cargarTabla(jTable2, "SELECT * FROM videojuego_tienda where Videojuego = "+jTable1.getModel().getValueAt(b, 0) +";");
+        
+        }
+         
+          if(jComboBox1.getSelectedItem().toString().equals("Tienda")){
+        
+             gesCon.cargarTabla(jTable2, "SELECT * FROM videojuego_tienda where Tienda = "+jTable1.getModel().getValueAt(b, 0) +";");
+        
+        }
+          
+          
+          
     }//GEN-LAST:event_jTable1MousePressed
+
+    private void jTable2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MousePressed
+        jButton1.setEnabled(true);
+        jTable1.clearSelection();
+    }//GEN-LAST:event_jTable2MousePressed
 
     /**
      * @param args the command line arguments
@@ -213,9 +288,9 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
